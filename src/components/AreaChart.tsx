@@ -61,7 +61,7 @@ export const AreaChart = ({
 
       <ResponsiveContainer width="100%" height={height}>
         <RechartsAreaChart
-          data={data}
+          data={[...data]}
           margin={{ top: 4, right: 4, bottom: 0, left: -12 }}
         >
           <defs>
