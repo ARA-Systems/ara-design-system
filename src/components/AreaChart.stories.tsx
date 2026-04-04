@@ -9,51 +9,101 @@ export default meta
 
 type Story = StoryObj<typeof AreaChart>
 
-const sampleData = [120, 180, 150, 280, 220, 310, 260, 400, 350, 420, 380, 500, 450, 480]
-const hourLabels = ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00']
+const salesData = [
+  { label: '00:00', value: 20 },
+  { label: '02:00', value: 45 },
+  { label: '04:00', value: 30 },
+  { label: '06:00', value: 80 },
+  { label: '08:00', value: 160 },
+  { label: '10:00', value: 280 },
+  { label: '12:00', value: 350 },
+  { label: '14:00', value: 420 },
+]
 
 export const Default: Story = {
   args: {
-    data: sampleData,
-    labels: hourLabels,
+    data: salesData,
     title: 'Desempenho de vendas',
     height: 220,
   },
 }
 
-export const SmallChart: Story = {
+export const WeeklyData: Story = {
   args: {
-    data: [10, 30, 25, 50, 45, 60, 55, 80],
-    labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
+    data: [
+      { label: 'Seg', value: 120 },
+      { label: 'Ter', value: 180 },
+      { label: 'Qua', value: 95 },
+      { label: 'Qui', value: 240 },
+      { label: 'Sex', value: 310 },
+      { label: 'Sab', value: 190 },
+      { label: 'Dom', value: 140 },
+    ],
     title: 'Vendas da semana',
-    height: 160,
-  },
-}
-
-export const VolatileData: Story = {
-  args: {
-    data: [200, 380, 120, 450, 80, 320, 500, 150, 400, 220, 480, 300],
-    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-    title: 'Evolução anual',
     height: 200,
   },
 }
 
-export const DashboardLayout: Story = {
+export const TicketMedio: Story = {
+  args: {
+    data: [
+      { label: '00:00', value: 12 },
+      { label: '02:00', value: 14 },
+      { label: '04:00', value: 11 },
+      { label: '06:00', value: 16 },
+      { label: '08:00', value: 18 },
+      { label: '10:00', value: 15 },
+      { label: '12:00', value: 20 },
+      { label: '14:00', value: 22 },
+    ],
+    title: 'Evolução do Ticket Médio',
+    height: 200,
+  },
+}
+
+export const DashboardPair: Story = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', maxWidth: 900 }}>
       <AreaChart
-        data={sampleData}
-        labels={hourLabels}
+        data={salesData}
         title="Desempenho de vendas"
         height={200}
       />
       <AreaChart
-        data={[12, 14, 11, 16, 13, 15, 18, 14, 17, 20, 16, 19, 22, 18]}
-        labels={hourLabels}
+        data={[
+          { label: '00:00', value: 12 },
+          { label: '02:00', value: 14 },
+          { label: '04:00', value: 11 },
+          { label: '06:00', value: 16 },
+          { label: '08:00', value: 18 },
+          { label: '10:00', value: 15 },
+          { label: '12:00', value: 20 },
+          { label: '14:00', value: 22 },
+        ]}
         title="Evolução do Ticket Médio"
         height={200}
       />
     </div>
   ),
+}
+
+export const MonthlyRevenue: Story = {
+  args: {
+    data: [
+      { label: 'Jan', value: 4200 },
+      { label: 'Fev', value: 5800 },
+      { label: 'Mar', value: 4900 },
+      { label: 'Abr', value: 7200 },
+      { label: 'Mai', value: 6100 },
+      { label: 'Jun', value: 8500 },
+      { label: 'Jul', value: 7800 },
+      { label: 'Ago', value: 9200 },
+      { label: 'Set', value: 8100 },
+      { label: 'Out', value: 10500 },
+      { label: 'Nov', value: 9800 },
+      { label: 'Dez', value: 12000 },
+    ],
+    title: 'Receita mensal',
+    height: 240,
+  },
 }
