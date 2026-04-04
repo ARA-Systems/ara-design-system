@@ -1,31 +1,34 @@
-import { ReactNode } from 'react';
+import { ReactNode } from 'react'
+import { ChangeBadge } from './ChangeBadge'
 
 export interface StatCardProps {
-  label: string;
-  value: string | number;
-  change?: number;
-  icon?: ReactNode;
+  label: string
+  subtitle?: string
+  value: string | number
+  change?: number
+  icon?: ReactNode
 }
 
-export const StatCard = ({ label, value, change, icon }: StatCardProps) => {
-  const isPositive = change !== undefined && change >= 0;
-  const changeColor = isPositive ? 'var(--color-success-500, #22C55E)' : 'var(--color-error-500, #EF4444)';
-  const changePrefix = isPositive ? '+' : '';
-
+export const StatCard = ({ label, subtitle, value, change, icon }: StatCardProps) => {
   return (
     <div className="stat-card">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-        <p className="stat-card-label">{label}</p>
-        {icon && <span className="stat-card-icon">{icon}</span>}
+        <div>
+          <p className="stat-card-label">{label}</p>
+          {subtitle && (
+            <p style={{ fontSize: 'var(--text-xs)', color: 'var(--c-fg-muted)', marginTop: '0.125rem' }}>
+              {subtitle}
+            </p>
+          )}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          {change !== undefined && <ChangeBadge value={change} />}
+          {icon && <span style={{ color: 'var(--c-fg-muted)' }}>{icon}</span>}
+        </div>
       </div>
-      <p className="stat-card-value">{value}</p>
-      {change !== undefined && (
-        <span className="stat-card-change" style={{ color: changeColor, fontSize: '0.8125rem', fontWeight: 500 }}>
-          {changePrefix}{change}%
-        </span>
-      )}
+      <p className="stat-card-value" style={{ marginTop: '0.375rem' }}>{value}</p>
     </div>
-  );
-};
+  )
+}
 
-export default StatCard;
+export default StatCard

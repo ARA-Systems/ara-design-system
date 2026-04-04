@@ -1,73 +1,57 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { DollarSign, TrendingUp, Users, CreditCard } from 'lucide-react';
-import { StatCard } from './StatCard';
+import type { Meta, StoryObj } from '@storybook/react'
+import { StatCard } from './StatCard'
 
 const meta: Meta<typeof StatCard> = {
   title: 'Components/StatCard',
   component: StatCard,
+}
+export default meta
+
+type Story = StoryObj<typeof StatCard>
+
+export const Default: Story = {
   args: {
-    label: 'Total Revenue',
-    value: '$48,295.00',
+    label: 'Total em vendas',
+    value: 'R$ 8.283,35',
   },
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof StatCard>;
-
-export const Default: Story = {};
-
-export const WithChange: Story = {
+export const WithSubtitle: Story = {
   args: {
-    label: 'Total Revenue',
-    value: '$48,295.00',
-    change: 12.4,
+    label: 'Pedidos feitos',
+    subtitle: 'Todos',
+    value: '652',
+    change: 12,
   },
-};
+}
 
-export const WithNegativeChange: Story = {
+export const NegativeChange: Story = {
   args: {
-    label: 'Chargeback Rate',
-    value: '2.3%',
-    change: -0.8,
+    label: 'Pedidos pagos',
+    subtitle: 'Todos',
+    value: '231',
+    change: -4,
   },
-};
+}
 
-export const WithIcon: Story = {
-  args: {
-    label: 'Total Revenue',
-    value: '$48,295.00',
-    change: 12.4,
-    icon: <DollarSign size={20} />,
-  },
-};
-
-export const Group: Story = {
+export const DashboardGroup: Story = {
   render: () => (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
-      <StatCard
-        label="Total Revenue"
-        value="$48,295"
-        change={12.4}
-        icon={<DollarSign size={20} />}
-      />
-      <StatCard
-        label="Transactions"
-        value="1,284"
-        change={8.1}
-        icon={<CreditCard size={20} />}
-      />
-      <StatCard
-        label="Active Users"
-        value="3,421"
-        change={5.3}
-        icon={<Users size={20} />}
-      />
-      <StatCard
-        label="Avg. Order Value"
-        value="$37.62"
-        change={-2.1}
-        icon={<TrendingUp size={20} />}
-      />
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', maxWidth: 800 }}>
+      <StatCard label="Total em vendas" value="R$ 8.283,35" />
+      <StatCard label="Pedidos feitos" subtitle="Todos" value="652" change={12} />
+      <StatCard label="Pedidos pagos" subtitle="Todos" value="231" change={-4} />
     </div>
   ),
-};
+}
+
+export const MobileDashboard: Story = {
+  render: () => (
+    <div style={{ maxWidth: 360, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+      <StatCard label="Total em vendas" value="R$ 8.283,35" />
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+        <StatCard label="Pedidos feitos" subtitle="Todos" value="652" change={12} />
+        <StatCard label="Pedidos pagos" subtitle="Todos" value="231" change={-4} />
+      </div>
+    </div>
+  ),
+}
