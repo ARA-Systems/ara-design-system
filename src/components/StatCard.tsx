@@ -9,7 +9,7 @@ export interface StatCardProps {
 
 export const StatCard = ({ label, value, change, icon }: StatCardProps) => {
   const isPositive = change !== undefined && change >= 0;
-  const changeColor = isPositive ? 'var(--color-success, #16a34a)' : 'var(--color-error, #dc2626)';
+  const changeColor = isPositive ? 'var(--color-success-500, #22C55E)' : 'var(--color-error-500, #EF4444)';
   const changePrefix = isPositive ? '+' : '';
 
   return (

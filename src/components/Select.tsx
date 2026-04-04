@@ -1,5 +1,5 @@
 import { forwardRef, SelectHTMLAttributes } from 'react';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, ChevronDown } from 'lucide-react';
 
 export interface SelectOption {
   value: string;
@@ -18,13 +18,26 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     return (
       <div>
-        <select ref={ref} className={cls} {...props}>
-          {options.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
+        <div style={{ position: 'relative' }}>
+          <select ref={ref} className={cls} style={{ paddingRight: '2.5rem' }} {...props}>
+            {options.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+          <ChevronDown
+            size={16}
+            style={{
+              position: 'absolute',
+              right: '0.625rem',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              color: 'var(--c-fg-muted)',
+              pointerEvents: 'none',
+            }}
+          />
+        </div>
         {hint && !error && <span className="form-hint">{hint}</span>}
         {error && (
           <span className="form-error-msg">

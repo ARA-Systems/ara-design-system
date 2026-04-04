@@ -307,10 +307,17 @@
   }
 
   /* ── Transição suave entre temas ────── */
-  *, *::before, *::after {
+  /* Apenas elementos, não pseudo-elements — evita conflito com radio/checkbox ::before */
+  * {
     transition-property: background-color, border-color, color;
     transition-duration: 200ms;
     transition-timing-function: ease;
+  }
+
+  /* Focus visible global — acessibilidade */
+  :focus-visible {
+    outline: 2px solid var(--c-primary);
+    outline-offset: 2px;
   }
 
   html {
@@ -627,12 +634,12 @@
 
   .checkbox::before {
     content: "";
-    width: 0.45rem;
-    height: 0.45rem;
-    transform: scale(0);
+    width: 0.5rem;
+    height: 0.5rem;
+    opacity: 0;
     background: white;
     clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-    transition: transform 0.15s ease;
+    transition: opacity 0.15s ease;
   }
 
   .checkbox:checked {
@@ -641,7 +648,7 @@
   }
 
   .checkbox:checked::before {
-    transform: scale(1);
+    opacity: 1;
   }
 
   .checkbox:focus-visible {
@@ -687,20 +694,21 @@
 
   .radio::before {
     content: "";
-    width: 0.45rem;
-    height: 0.45rem;
+    width: 0.5rem;
+    height: 0.5rem;
     border-radius: 50%;
-    transform: scale(0);
+    opacity: 0;
     background: var(--c-primary);
-    transition: transform 0.15s ease;
+    transition: opacity 0.15s ease;
   }
 
   .radio:checked {
     border-color: var(--c-primary);
+    border-width: 2px;
   }
 
   .radio:checked::before {
-    transform: scale(1);
+    opacity: 1;
   }
 
   .radio:focus-visible {
@@ -838,9 +846,6 @@
     appearance: none;
     cursor: pointer;
     outline: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2371717A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.625rem center;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .select:focus {
@@ -875,12 +880,13 @@
     height: 1.125rem;
     background: white;
     border-radius: 50%;
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.12);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .toggle-root input:checked ~ .toggle-track { background-color: var(--c-primary); }
   .toggle-root input:checked ~ .toggle-thumb { transform: translateX(1.25rem); }
-  .toggle-root input:disabled ~ .toggle-track { opacity: 0.45; cursor: not-allowed; }
+  .toggle-root input:disabled ~ .toggle-track { opacity: 0.4; cursor: not-allowed; }
+  .toggle-root input:disabled ~ .toggle-thumb { opacity: 0.7; cursor: not-allowed; }
 
   .toggle-label {
     display: inline-flex;
@@ -1216,6 +1222,18 @@
   .page-btn:hover { background: var(--c-bg-secondary); border-color: var(--c-border); }
   .page-btn-active { background: var(--c-primary); color: white; border-color: var(--c-primary-border); }
   .page-btn:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+  .page-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--c-primary-ring); }
+
+  .page-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    height: 2rem;
+    font-size: var(--text-sm);
+    color: var(--c-fg-muted);
+    user-select: none;
+  }
 
   /* ── Accordion ──────────────────────────── */
 
