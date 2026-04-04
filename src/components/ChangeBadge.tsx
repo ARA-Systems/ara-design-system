@@ -1,18 +1,24 @@
+import { ArrowUp, ArrowDown } from 'lucide-react'
+
 export interface ChangeBadgeProps {
   value: number
-  showDot?: boolean
 }
 
-export const ChangeBadge = ({ value, showDot = true }: ChangeBadgeProps) => {
+export const ChangeBadge = ({ value }: ChangeBadgeProps) => {
   const isPositive = value >= 0
   const cls = `change-badge ${isPositive ? 'change-badge-positive' : 'change-badge-negative'}`
-  const prefix = isPositive ? '+' : ''
+  const prefix = isPositive ? '+' : '-'
   const formatted = `${prefix}${String(Math.abs(value)).padStart(2, '0')}`
 
   return (
     <span className={cls}>
+      <span className="change-badge-icon">
+        {isPositive
+          ? <ArrowUp size={10} strokeWidth={3} />
+          : <ArrowDown size={10} strokeWidth={3} />
+        }
+      </span>
       {formatted}
-      {showDot && <span className="change-badge-dot" />}
     </span>
   )
 }

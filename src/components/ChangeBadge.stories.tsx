@@ -17,10 +17,6 @@ export const Negative: Story = {
   args: { value: -4 },
 }
 
-export const NoDot: Story = {
-  args: { value: 8, showDot: false },
-}
-
 export const AllVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
