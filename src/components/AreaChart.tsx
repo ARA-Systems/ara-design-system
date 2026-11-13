@@ -27,7 +27,7 @@ export const AreaChart = ({
   data,
   title = 'Desempenho de vendas',
   height = 220,
-  color = '#58C411',
+  color = '#1760fd',
   showInfo = true,
 }: AreaChartProps) => {
   const gradientId = useMemo(

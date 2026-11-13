@@ -2,16 +2,14 @@ import type { Preview } from '@storybook/react'
 import '../src/styles/globals.css'
 
 const THEMES: Record<string, string> = {
-  'Green Light': '',
-  'Green Dark':  'dark',
-  'Blue Light':  'theme-blue',
-  'Blue Dark':   'theme-blue dark',
+  'Visor Light': '',
+  'Visor Dark':  'dark',
 }
 
 const preview: Preview = {
   globalTypes: {
     theme: {
-      description: 'ARA Theme',
+      description: 'Visor Theme',
       toolbar: {
         title: 'Theme',
         icon: 'paintbrush',
@@ -21,7 +19,7 @@ const preview: Preview = {
     },
   },
   initialGlobals: {
-    theme: 'Green Light',
+    theme: 'Visor Light',
   },
   decorators: [
     (Story, context) => {
