@@ -28,6 +28,48 @@ export const Default: Story = {
   },
 }
 
+/** Shop score over time: red to green line, fixed 1 to 5 axis, previous period as the dashed line. */
+export const ShopScore: Story = {
+  args: {
+    data: [
+      { label: 'Jun', value: 3.4 },
+      { label: 'Jul', value: 3.7 },
+      { label: 'Ago', value: 4.1 },
+      { label: 'Set', value: 4.3 },
+      { label: 'Out', value: 4.4 },
+      { label: 'Nov', value: 4.6 },
+    ],
+    title: 'Evolução da nota da loja',
+    tone: 'score',
+    domain: [1, 5],
+    reference: 4,
+    referenceLabel: 'período anterior 4,0',
+    endLabel: 'Nota da loja 4,6',
+    formatValue: (value: number) => `${value.toFixed(1).replace('.', ',')} de 5`,
+    height: 240,
+  },
+}
+
+/** White line on the brand blue, for a highlight tile. */
+export const OnBrand: Story = {
+  args: {
+    data: [
+      { label: 'Jun', value: 3.4 },
+      { label: 'Jul', value: 3.7 },
+      { label: 'Ago', value: 4.1 },
+      { label: 'Set', value: 4.3 },
+      { label: 'Out', value: 4.4 },
+      { label: 'Nov', value: 4.6 },
+    ],
+    title: 'Evolução da nota',
+    tone: 'onBrand',
+    domain: [1, 5],
+    endLabel: '4,6 de 5',
+    showInfo: false,
+    height: 220,
+  },
+}
+
 export const WeeklyData: Story = {
   args: {
     data: [
