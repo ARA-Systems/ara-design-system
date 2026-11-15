@@ -12,6 +12,15 @@ import {
 } from './components'
 import './styles/globals.css'
 
+const scoreData = [
+  { label: 'Jun', value: 3.4 },
+  { label: 'Jul', value: 3.7 },
+  { label: 'Ago', value: 4.1 },
+  { label: 'Set', value: 4.3 },
+  { label: 'Out', value: 4.4 },
+  { label: 'Nov', value: 4.6 },
+]
+
 const salesData = [
   { label: '00:00', value: 20 },
   { label: '02:00', value: 45 },
@@ -146,6 +155,26 @@ export default function App() {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
               <AreaChart data={salesData} title="Desempenho de vendas" height={200} />
               <AreaChart data={ticketData} title="Evolução do Ticket Médio" height={200} />
+              <AreaChart
+                data={scoreData}
+                title="Evolução da nota da loja"
+                tone="score"
+                domain={[1, 5]}
+                reference={4}
+                referenceLabel="período anterior 4,0"
+                endLabel="Nota da loja 4,6"
+                formatValue={(value) => `${value.toFixed(1).replace('.', ',')} de 5`}
+                height={220}
+              />
+              <AreaChart
+                data={scoreData}
+                title="Evolução da nota"
+                tone="onBrand"
+                domain={[1, 5]}
+                endLabel="4,6 de 5"
+                showInfo={false}
+                height={220}
+              />
             </div>
           </Section>
 
