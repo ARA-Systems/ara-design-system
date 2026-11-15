@@ -2716,6 +2716,14 @@
 @layer components {
   /* -- Perguntas do formulário público (pf-field): campos, opções e escalas -- */
   .pf-field { margin: 0; padding: 0; border: 0; min-width: 0; display: flex; flex-direction: column; }
+  /* The experience question ("Como foi sua experiência?") is the main rating: it leads */
+  .pf-field[data-experience] > .pf-label { font-size: 1.1875rem; font-weight: 600; }
+  .pf-field[data-experience] .pf-rating { gap: 0.5rem; }
+  .pf-field[data-experience] .pf-rating > * { min-height: 4rem; }
+  .pf-field[data-experience] .pf-rating svg { width: 1.75rem; height: 1.75rem; }
+  /* Detail ratings after it (por tema) stay smaller: the experience question reads as "the" score */
+  .pf-field:not([data-experience]) .pf-rating > * { min-height: 2.75rem; }
+  .pf-field:not([data-experience]) .pf-rating svg { width: 1.125rem; height: 1.125rem; }
   .pf-label { display: block; float: none; width: 100%; padding: 0; margin: 0 0 0.5rem; font-size: 1rem; font-weight: 500; line-height: 1.4; color: var(--c-fg); }
   .pf-help { margin: 0.375rem 0 0; font-size: 0.875rem; line-height: 1.45; color: var(--c-fg-secondary); }
   .pf-help-top { margin: -0.25rem 0 0.5rem; }
@@ -3138,7 +3146,7 @@
   .fb-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem 0.5rem; margin: 0 0 0.75rem; font-size: var(--text-sm); color: var(--c-fg-secondary); }
   .fb-chip { padding: 0.25rem 0.625rem; border-radius: 999px; background: var(--c-bg-secondary); color: var(--c-fg); font-weight: 500; }
   .fb-clear { border: 0; background: none; cursor: pointer; font: inherit; font-weight: 500; min-height: 2.75rem; }
-  .fb-overdue-banner { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.75rem; padding: 0.625rem 0.875rem; border-radius: var(--radius-lg); background: var(--c-error-light); color: var(--c-error); font-size: var(--text-sm); font-weight: 500; }
+  .fb-overdue-banner { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.75rem; padding: 0.625rem 0.875rem; border-radius: var(--radius-lg); background: var(--c-warning-light); color: var(--c-fg); font-size: var(--text-sm); font-weight: 500; }
   .fb-tab-late { display: inline-flex; color: var(--c-error); }
   .fb-lane-empty { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-align: center; }
   .fb-lane-empty p { margin: 0; }
@@ -3179,6 +3187,7 @@
   }
   .fb-overdue-banner { flex-wrap: wrap; }
   .fb-overdue-banner > span { flex: 1 1 12rem; }
+  .fb-overdue-banner .fb-overdue-action { color: var(--c-fg); }
   .fb-overdue-action { min-height: 2.75rem; padding: 0 0.875rem; border: 0; border-radius: var(--radius-lg); background: var(--c-surface); color: var(--c-error); font: inherit; font-weight: 600; cursor: pointer; }
   .fb-overdue-action:focus-visible { outline: 2px solid var(--c-error); outline-offset: 2px; }
 }
@@ -3296,12 +3305,38 @@
   /* Shop score (1–5): the star after the number; the optional NPS kept apart, below */
   .home-score-star, .ins-kpi-suffix { font-size: 0.55em; font-weight: 500; color: var(--color-score-neutral); vertical-align: 0.35em; }
   .home-nps { margin: 0.25rem 0 0; font-size: var(--text-xs); line-height: 1.5; color: var(--c-fg-secondary); }
+  /* Where the score sits: ruim · atenção · bom · excelente */
+  .home-scale { margin: 0.25rem 0 0.5rem; width: 100%; max-width: 22rem; }
+  .home-scale-bar { position: relative; display: flex; gap: 2px; height: 0.625rem; }
+  .home-scale-bar > span:not(.home-scale-mark) { border-radius: 2px; }
+  .home-scale-mark { position: absolute; top: 50%; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: var(--c-surface); border: 2px solid var(--c-fg); transform: translate(-50%, -50%); }
+  .home-scale-labels { display: flex; gap: 2px; margin-top: 0.375rem; font-size: var(--text-xs); color: var(--c-fg-secondary); }
+  .home-scale-labels > span { flex-basis: 0; min-width: 0; text-align: center; white-space: nowrap; }
+  .home-scale-labels > span:first-child { text-align: left; }
+  .home-scale-labels > span:last-child { text-align: right; }
+  .ins-point-label { font-size: 12px; font-weight: 600; fill: var(--c-fg); }
+  .ins-line-gap { stroke-dasharray: 3 5; opacity: 0.35; }
+  .score-tile-star { font-size: 0.6em; margin-left: 0.05em; vertical-align: 0.25em; opacity: 0.8; }
+  .st-item-tag-quiet { background: var(--c-bg-secondary); color: var(--c-fg-secondary); }
+  .ins-ref-line { stroke: var(--c-fg-muted); stroke-width: 1; stroke-dasharray: 2 4; }
+  .ins-ref-label { font-size: 11px; fill: var(--c-fg-muted); }
+  .home-scale-range { display: block; font-size: var(--text-xs); font-weight: 400; color: var(--c-fg-secondary); }
+  .home-next-band { margin: 0.375rem 0 0; font-size: var(--text-sm); font-weight: 600; color: var(--c-fg); }
+  .fb-banner-link { padding: 0; border: 0; background: none; color: inherit; font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer; }
+  .ins-kpi-verdict { margin: -0.25rem 0 0; font-size: var(--text-sm); font-weight: 500; color: var(--c-fg-secondary); }
+  .home-scale-labels > span[data-on] { color: var(--c-fg); font-weight: 600; }
+  .home-scale-next { margin: 0.375rem 0 0; font-size: var(--text-xs); font-weight: 500; color: var(--c-fg); }
+  /* The optional 0–10 answer in a review: below the stars, quieter */
+  .sheet-answer[data-secondary] .sheet-answer-label, .sheet-answer[data-secondary] .sheet-answer-value { color: var(--c-fg-secondary); font-size: var(--text-sm); }
+  .sheet-answer-kicker { margin: 0 0 0.125rem; font-size: var(--text-xs); font-weight: 500; color: var(--c-fg-muted); }
   .ins-nps { margin-top: 1rem; padding-top: 0.875rem; border-top: 1px solid var(--c-border-muted); }
-  .ins-nps-head { margin: 0 0 0.25rem; display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; font-size: var(--text-sm); color: var(--c-fg); }
-  .ins-nps-head strong { font-size: var(--text-lg); font-variant-numeric: tabular-nums; }
+  .ins-nps-head { margin: 0 0 0.25rem; display: flex; flex-direction: column; gap: 0.125rem; font-size: var(--text-sm); color: var(--c-fg); }
+  .ins-nps-head strong { font-weight: 500; font-variant-numeric: tabular-nums; color: var(--c-fg-secondary); }
   /* Per place: the same row as per form, without the chevron (nothing to open) */
   .ins-source-row { grid-template-columns: minmax(0, 1fr) 6.5rem 3rem; cursor: default; }
-  @media (max-width: 767px) { .ins-source-row { grid-template-columns: minmax(0, 1fr) 3rem; } }
+  /* The optional 0–10 question in "pergunta a pergunta": a note says it is apart */
+  .ins-q-note { margin: 0 0 0.5rem; font-size: var(--text-xs); color: var(--c-fg-secondary); }
+  @media (max-width: 767px) { .ins-source-row { grid-template-columns: minmax(0, 1fr) 3rem; } .ins-source-row .truncate { white-space: normal; } }
   .ins-form-row[data-few] .ins-mini-bar { opacity: 0.45; }
   .empty-block .btn { margin-top: 0.75rem; }
 }
